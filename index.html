@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ONLY HEALTH - Find nearby hospitals and medical stores using your live location." />
+  <title>ONLY HEALTH – Your Health Companion</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       LOADING OVERLAY – shown while fetching user location
+  ============================================================ -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loader-box">
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring delay1"></div>
+      <div class="pulse-ring delay2"></div>
+      <i class="fa-solid fa-heart-pulse loader-icon"></i>
+      <p class="loader-text">Detecting your location…</p>
+      <p class="loader-sub">Please allow location access when prompted</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <!-- Brand / Logo -->
+      <a href="#" class="nav-brand" id="homeBtn">
+        <i class="fa-solid fa-heart-pulse brand-icon"></i>
+        <span class="brand-text">ONLY <span class="brand-accent">HEALTH</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" class="nav-link active" id="navHome"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="#" class="nav-link" id="navStores"><i class="fa-solid fa-pills"></i> Medical Stores</a></li>
+        <li><a href="#" class="nav-link" id="navHospitals"><i class="fa-solid fa-hospital"></i> Hospitals</a></li>
+      </ul>
+
+      <!-- Right Controls -->
+      <div class="nav-controls">
+        <!-- Dark / Light Mode Toggle -->
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HOMEPAGE / DASHBOARD SECTION
+  ============================================================ -->
+  <section class="hero-section" id="homeSection">
+
+    <!-- Animated background blobs -->
+    <div class="bg-blob blob1"></div>
+    <div class="bg-blob blob2"></div>
+    <div class="bg-blob blob3"></div>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-location-dot"></i> Location-Aware Health Search
+      </div>
+      <h1 class="hero-title">Find Health Care<br /><span class="gradient-text">Near You, Instantly</span></h1>
+      <p class="hero-subtitle">
+        Discover nearby hospitals and medical stores using your live GPS location.
+        Real-time data, interactive maps, and all the details you need – in one place.
+      </p>
+
+      <!-- Dashboard Cards -->
+      <div class="dashboard-cards">
+
+        <!-- Medical Stores Card -->
+        <div class="dash-card" id="medStoreCard" tabindex="0" role="button" aria-label="Find Medical Stores">
+          <div class="card-glow glow-green"></div>
+          <div class="card-icon-wrap icon-green">
+            <i class="fa-solid fa-pills"></i>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">Medical Stores</h2>
+            <p class="card-desc">Find pharmacies & drug stores near you with directions and contact info.</p>
+          </div>
+          <div class="card-footer-action">
+            <span>Explore Nearby</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+          <div class="card-shine"></div>
+        </div>
+
+        <!-- Hospitals Card -->
+        <div class="dash-card" id="hospitalCard" tabindex="0" role="button" aria-label="Find Hospitals">
+          <div class="card-glow glow-blue"></div>
+          <div class="card-icon-wrap icon-blue">
+            <i class="fa-solid fa-hospital"></i>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">Hospitals</h2>
+            <p class="card-desc">Locate hospitals & clinics close to you, with ratings and availability.</p>
+          </div>
+          <div class="card-footer-action">
+            <span>Explore Nearby</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+          <div class="card-shine"></div>
+        </div>
+
+      </div><!-- /dashboard-cards -->
+
+      <!-- Quick Stats Bar -->
+      <div class="stats-bar">
+        <div class="stat-item">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Live GPS Tracking</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <i class="fa-solid fa-satellite-dish"></i>
+          <span>Satellite Map View</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Privacy First</span>
+        </div>
+      </div>
+
+    </div><!-- /hero-content -->
+  </section>
+
+  <!-- ============================================================
+       MAP / RESULTS SECTION
+  ============================================================ -->
+  <section class="map-section hidden" id="mapSection">
+
+    <!-- Section Header -->
+    <div class="map-header">
+      <div class="map-header-left">
+        <button class="back-btn" id="backBtn" aria-label="Go back to dashboard">
+          <i class="fa-solid fa-arrow-left"></i> Dashboard
+        </button>
+        <h2 class="map-section-title" id="mapSectionTitle">
+          <i class="fa-solid fa-pills" id="mapSectionIcon"></i>
+          <span id="mapSectionText">Medical Stores</span>
+        </h2>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Filter results by name…"
+          aria-label="Filter nearby places"
+        />
+        <button class="search-clear hidden" id="searchClear" aria-label="Clear search">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- View Toggle -->
+      <div class="view-toggle">
+        <button class="view-btn active" id="splitViewBtn" title="Split view" aria-label="Split view">
+          <i class="fa-solid fa-table-columns"></i>
+        </button>
+        <button class="view-btn" id="mapOnlyBtn" title="Map only" aria-label="Map only view">
+          <i class="fa-solid fa-map"></i>
+        </button>
+        <button class="view-btn" id="listOnlyBtn" title="List only" aria-label="List only view">
+          <i class="fa-solid fa-list"></i>
+        </button>
+      </div>
+    </div><!-- /map-header -->
+
+    <!-- Split Layout -->
+    <div class="map-layout" id="mapLayout">
+
+      <!-- Google Map Container -->
+      <div class="map-container" id="mapContainer">
+        <div id="map"></div>
+        <!-- Recenter Button -->
+        <button class="recenter-btn" id="recenterBtn" title="Re-center to my location" aria-label="Recenter map">
+          <i class="fa-solid fa-crosshairs"></i>
+        </button>
+      </div>
+
+      <!-- Results List Panel -->
+      <div class="results-panel" id="resultsPanel">
+        <div class="results-header">
+          <span id="resultsCount" class="results-count">Loading…</span>
+          <span class="results-label">nearby results</span>
+        </div>
+        <ul class="results-list" id="resultsList" aria-live="polite">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+
+    </div><!-- /map-layout -->
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" id="siteFooter">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <i class="fa-solid fa-heart-pulse"></i>
+        <span>ONLY <strong>HEALTH</strong></span>
+      </div>
+      <p class="footer-tagline">Your trusted companion for health care discovery.</p>
+      <div class="footer-links">
+        <a href="#" aria-label="Privacy Policy">Privacy</a>
+        <span>·</span>
+        <a href="#" aria-label="Terms of Service">Terms</a>
+        <span>·</span>
+        <a href="#" aria-label="Contact Us">Contact</a>
+      </div>
+      <p class="footer-copy">&copy; <span id="footerYear"></span> ONLY HEALTH. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       ERROR TOAST
+  ============================================================ -->
+  <div class="toast hidden" id="errorToast" role="alert" aria-live="assertive">
+    <i class="fa-solid fa-circle-exclamation toast-icon"></i>
+    <span id="toastMsg">Something went wrong.</span>
+    <button class="toast-close" id="toastClose" aria-label="Dismiss notification">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- Main Script — must load BEFORE Maps so initMap is defined as callback -->
+  <script src="script.js"></script>
+
+  <!-- ============================================================
+       GOOGLE MAPS API
+       ▶ REPLACE THE VALUE OF `key=` BELOW WITH YOUR ACTUAL API KEY
+  ============================================================ -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCywamnzNYePy25lK0RlJoGJjZj3UfMaAk&libraries=places&callback=initMap"
+    async
+    defer
+  ></script>
+
+</body>
+</html>
